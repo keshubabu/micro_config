@@ -41,5 +41,5 @@ management:
 app:
  paseto:
    # This key MUST be exactly 32 bytes long for v2.local tokens
-   shared-secret1: "*********a-valid-32-byte-long-secret-key!"
+   shared-secret1: "a-valid-32-byte-long-secret-key!"
 usr_name: dev-gateway
