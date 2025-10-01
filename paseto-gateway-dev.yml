@@ -1,30 +1,29 @@
 spring:
   application:
     name: paseto-gateway
-cloud:
-  consul:
-    host: localhost
-    port: 8500
-    discovery:
-      instance-id: "${spring.application.name}:${spring.application.instance_id:${random.value}}"
-      health-check-path: /actuator/health
-      health-check-interval: 15s
-      health-check-timeout: 5s
-      register: true
-      enabled: true
-  gateway:
-    routes:
-      - id: sarauthentication
-        uri: http://localhost:8091
-        predicates:
-          - Path=/sauth/**
-        filters:
-          - name: PasetoAuthentication
-
-      - id: sarusermanager
-        uri: http://localhost:8092
-        predicates:
-        - Path=/user/**
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        instance-id: "${spring.application.name}:${spring.application.instance_id:${random.value}}"
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+        health-check-timeout: 5s
+        register: true
+        enabled: true
+    gateway:
+      routes:
+        - id: sarauthentication
+          uri: http://localhost:8091
+          predicates:
+            - Path=/sauth/**
+          filters:
+            - name: PasetoAuthentication
+        - id: sarusermanager
+          uri: http://localhost:8092
+          predicates:
+            - Path=/user/**
 
 management:
   endpoints:
@@ -35,6 +34,7 @@ management:
 # Configuration for Paseto
 app:
   paseto:
-   # This key MUST be exactly 32 bytes long for v2.local tokens
+    # This key MUST be exactly 32 bytes long for v2.local tokens
     shared-secret1: "a-valid-32-byte-long-secret-key!"
+
 usr_name: dev-gateway
