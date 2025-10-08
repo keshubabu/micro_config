@@ -1,6 +1,9 @@
+server:
+  port: 8080
+
 spring:
   application:
-    name: paseto-gateway
+    name: s5-api-gateway
   cloud:
     consul:
       host: localhost
@@ -31,7 +34,13 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health, info, metrics, prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
 
 # Configuration for Paseto
 app:
