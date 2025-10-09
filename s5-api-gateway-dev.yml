@@ -6,7 +6,8 @@ spring:
     name: s5-api-gateway
   cloud:
     consul:
-      host: localhost
+      #host: localhost
+      host: consul
       port: 8500
       discovery:
         instance-id: "${spring.application.name}:${spring.application.instance_id:${random.value}}"
@@ -18,13 +19,15 @@ spring:
     gateway:
       routes:
         - id: sarauthentication
-          uri: http://localhost:8091
+          #uri: http://localhost:8091
+          uri: lb://sarauthentication
           predicates:
             - Path=/sauth/**
           filters:
             - name: PasetoAuthentication
         - id: sarusermanager
-          uri: http://localhost:8092
+          #uri: http://localhost:8092
+          uri: lb://sarusermanager
           predicates:
             - Path=/user/**
           filters:
