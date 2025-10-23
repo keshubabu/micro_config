@@ -17,19 +17,25 @@ spring:
       enabled: true
   gateway:
     routes:
+      - id: sarauthentication
+        #uri: http://localhost:8091
+        uri: lb://sarauthentication
+        predicates:
+          - Path=/sauth/**
+        filters:
+          - name: PasetoAuthentication
       - id: sarusermanager
+        #uri: http://localhost:8092
         uri: lb://sarusermanager
         predicates:
           - Path=/user/**
+        filters:
+          - name: PasetoAuthentication
 management:
   endpoints:
     web:
       exposure:
         include: health, info, metrics, prometheus
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    org.springframework.cloud.loadbalancer: DEBUG
 tracing:
   sampling:
     probability: 1.0
