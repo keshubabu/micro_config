@@ -29,8 +29,6 @@ spring:
         uri: lb://sarusermanager
         predicates:
           - Path=/user/**
-        filters:
-          - name: PasetoAuthentication
 management:
   endpoints:
     web:
