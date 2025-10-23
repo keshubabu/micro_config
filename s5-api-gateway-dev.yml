@@ -1,6 +1,5 @@
 server:
   port: 8080
-
 spring:
   application:
     name: s5-api-gateway
@@ -9,43 +8,43 @@ spring:
       #host: localhost
       host: consul
       port: 8500
-      discovery:
-        instance-id: "${spring.application.name}:${spring.application.instance_id:${random.value}}"
-        health-check-path: /actuator/health
-        health-check-interval: 15s
-        health-check-timeout: 5s
-        register: true
-        enabled: true
-    gateway:
-      routes:
-        - id: sarauthentication
-          #uri: http://localhost:8091
-          uri: lb://sarauthentication
-          predicates:
-            - Path=/sauth/**
-          filters:
-            - name: PasetoAuthentication
-        - id: sarusermanager
-          #uri: http://localhost:8092
-          uri: lb://sarusermanager
-          predicates:
-            - Path=/user/**
-          filters:
-            - name: PasetoAuthentication
-
+    discovery:
+      instance-id: "${spring.application.name}:${spring.application.instance_id:${random.value}}"
+      health-check-path: /actuator/health
+      health-check-interval: 15s
+      health-check-timeout: 5s
+      register: true
+      enabled: true
+  gateway:
+    routes:
+      - id: sarauthentication
+        #uri: http://localhost:8091
+        uri: lb://sarauthentication
+        predicates:
+          - Path=/sauth/**
+        filters:
+          - name: PasetoAuthentication
+      - id: sarusermanager
+        #uri: http://localhost:8092
+        uri: lb://sarusermanager
+        predicates:
+          - Path=/user/**
+        filters:
+          - name: PasetoAuthentication
 management:
   endpoints:
     web:
       exposure:
         include: health, info, metrics, prometheus
   tracing:
-    sampling:
-      probability: 1.0
-
+    propagation:
+      type: B3
+tracing:
+  sampling:
+    probability: 1.0
 # Configuration for Paseto
 app:
   paseto:
     # This key MUST be exactly 32 bytes long for v2.local tokens
     shared-secret1: "a-valid-32-byte-long-secret-key!"
-
-usr_name: dev-gateway
+  usr_name: dev-gateway
