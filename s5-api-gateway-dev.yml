@@ -17,15 +17,7 @@ spring:
       enabled: true
   gateway:
     routes:
-      - id: sarauthentication
-        #uri: http://localhost:8091
-        uri: lb://sarauthentication
-        predicates:
-          - Path=/sauth/**
-        filters:
-          - name: PasetoAuthentication
       - id: sarusermanager
-        #uri: http://localhost:8092
         uri: lb://sarusermanager
         predicates:
           - Path=/user/**
