@@ -24,11 +24,6 @@ spring:
           - Path=/sauth/**
         filters:
           - name: PasetoAuthentication
-      - id: sarusermanager
-        #uri: http://localhost:8092
-        uri: lb://sarusermanager
-        predicates:
-          - Path=/user/**
 management:
   endpoints:
     web:
