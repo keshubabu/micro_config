@@ -42,6 +42,8 @@ tracing:
 logging:
   level:
     org.springframework.cloud.gateway: trace
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} [${spring.application.name},%X{traceId:-},%X{spanId:-}] - %msg%n"
 # Configuration for Paseto
 app:
   paseto:
