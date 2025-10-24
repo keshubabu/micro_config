@@ -39,6 +39,9 @@ management:
 tracing:
   sampling:
     probability: 1.0
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
 # Configuration for Paseto
 app:
   paseto:
